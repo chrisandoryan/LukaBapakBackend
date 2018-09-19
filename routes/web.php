@@ -11,8 +11,8 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/', 'HOController@convertHODBToUsefulDB');
+// Route::get('/', 'HOController@convertHODBToUsefulDB');

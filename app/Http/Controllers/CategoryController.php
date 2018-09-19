@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::where('parent_id', NULL)->get();
+        $categories = Category::where('parent_uuid', NULL)->get();
 
         return CategoryResource::collection($categories);
     }

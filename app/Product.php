@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
     public $timestamps = false;
-    protected $fillable = ['uuid', 'category_uuid'];
+    protected $fillable = ['uuid', 'category_uuid', 'user_uuid'];
     //
     public function images()
     {
