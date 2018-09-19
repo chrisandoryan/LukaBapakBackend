@@ -3,3 +3,6 @@ https://blog.pusher.com/build-rest-api-laravel-api-resources/
 
 Laravel Popular Search Helper
 https://packagist.org/packages/jordanmiguel/laravel-popular
+
+DB Restructure
+create table users select * from lukabapak.users limit 0; //copy table structure excluding its content
