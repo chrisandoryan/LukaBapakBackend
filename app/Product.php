@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\CartDetail;
+use App\DetailFavorite;
+use App\DetailPromotion;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -24,6 +27,21 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function cartDetails()
+    {
+        return $this->hasMany(CartDetail::class);
+    }
+
+    public function detailFavorites()
+    {
+        return $this->hasMany(DetailFavorite::class);
+    }
+
+    public function detailPromotions()
+    {
+        return $this->hasMany(DetailPromotion::class);
     }
 
 }

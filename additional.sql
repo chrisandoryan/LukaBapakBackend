@@ -36,7 +36,7 @@ create table transactions (
     payment_date date,
     payment_approved_date date,
     completed_date date,
-    foreign key(method_id) references payment_methods(id),
+    foreign key(payment_method) references payment_methods(id),
     foreign key(city_id) references cities(id)
 );
 
@@ -84,4 +84,4 @@ create table discussions (
     parent_id int primary key,
     product_uuid varchar(40),
     content text
-);
+);--consider using node trait?

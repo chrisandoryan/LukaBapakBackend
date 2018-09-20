@@ -2,17 +2,21 @@
 
 namespace App;
 
+use App\Delivery;
+use App\CartHeader;
+use Ramsey\Uuid\Uuid;
+use App\HeaderFavorite;
+use App\HeaderPromotion;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-use Ramsey\Uuid\Uuid;
 
 class User extends Authenticatable
 {
     use Notifiable;
     public $incrementing = false;
     protected $primaryKey = 'uuid';
-    //protected $table = 'new_users';
+    protected $table = 'new_users';
     
     public static function boot()
     {
@@ -54,4 +58,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class);
     }
+
+    public function CartHeaders()
+    {
+        return $this->hasMany(CartHeader::class);
+    }
+
+    public function deliveries()
+    {
+        return $this->hasMany(Delivery::class);
+    }
+
+    public function headerFavorite()
+    {
+        return $this->hasOne(HeaderFavorite::class);
+    }
+
+    public function headerPromotion()
+    {
+        return $this->hasMany(HeaderPromotion::class);
+    }   
 }

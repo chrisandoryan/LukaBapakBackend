@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     //
-    //protected $primaryKey = 'uuid';
+    protected $primaryKey = 'uuid';
     public $incrementing = false;
-    //protected $table = 'new_categories';
+    protected $table = 'new_categories';
     // use NodeTrait;
     public function products()
     {
