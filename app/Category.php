@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     //
-    protected $primaryKey = 'uuid';
+    //protected $primaryKey = 'uuid';
     public $incrementing = false;
-    protected $table = 'new_categories';
+    //protected $table = 'new_categories';
     // use NodeTrait;
     public function products()
     {
@@ -18,10 +18,10 @@ class Category extends Model
     }
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_uuid', 'uuid');
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
     }
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_uuid', 'uuid');
+        return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 }

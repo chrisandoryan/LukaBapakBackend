@@ -12,7 +12,7 @@ class User extends Authenticatable
     use Notifiable;
     public $incrementing = false;
     protected $primaryKey = 'uuid';
-    protected $table = 'new_users';
+    //protected $table = 'new_users';
     
     public static function boot()
     {

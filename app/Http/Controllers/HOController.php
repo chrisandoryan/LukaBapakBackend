@@ -34,9 +34,13 @@ class HOController extends Controller
             ]);
             // error_log("Updating user_uuid with uuid: " . $usuuid . " on a product with id: " . $user->product->name);
             // required query: alter table products add column user_uuid varchar(40) after user_id;
-            $user->product()->update([
-                'user_id' => $usuuid
-            ]);
+            $products = Product::where('user_id', $user->uuid)->get();
+            foreach ($products as $product) {
+                error_log('updating product with owner id: ' . $user->uuid);
+                $product->update([
+                    'user_uuid' => $usuuid
+                ]);
+            }
         }
 
         $sourceParentCategories = Category::where('parent_id', null)->get();

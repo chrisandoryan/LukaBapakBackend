@@ -6,3 +6,18 @@ https://packagist.org/packages/jordanmiguel/laravel-popular
 
 DB Restructure
 create table users select * from lukabapak.users limit 0; //copy table structure excluding its content
+
+Table Requirements:
+1. invoice
+2. transaction
+3. promo header detail
+4. roles
+5. review
+6. reputation
+7. banks
+8. adresses
+9. voucher ada limit price start date end date
+10. popular tag
+11. discussion product id user id parent id
+12. cart header detail
+13. favorite header detail
