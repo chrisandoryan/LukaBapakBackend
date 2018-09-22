@@ -7,6 +7,9 @@ https://packagist.org/packages/jordanmiguel/laravel-popular
 DB Restructure
 create table users select * from lukabapak.users limit 0; //copy table structure excluding its content
 
+React JS Dropdown
+https://blog.campvanilla.com/reactjs-dropdown-menus-b6e06ae3a8fe
+
 Table Requirements:
 1. invoice
 2. transaction
