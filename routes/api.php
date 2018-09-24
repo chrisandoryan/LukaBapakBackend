@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
+Route::get('/verify/{token}', 'AuthController@activateAccount');
 
 Route::apiResource('products', 'ProductController');
 Route::apiResource('categories', 'CategoryController');
