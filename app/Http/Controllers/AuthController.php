@@ -11,11 +11,13 @@ class AuthController extends Controller
     //
     public function register(Request $request)
     {
+        // return $request;
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|unique:new_users',
             'username' => 'required|unique:new_users',
             'password' => 'required',
+            'gender' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -31,7 +33,7 @@ class AuthController extends Controller
 
         $token = auth()->login($user);
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token, $user);
     }
 
     public function login(Request $request)
@@ -45,9 +47,11 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $user)
     {
         return response()->json([
+            'success' => true,
+            'data' => $user,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60

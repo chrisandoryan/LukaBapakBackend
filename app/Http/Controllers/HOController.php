@@ -15,7 +15,7 @@ class HOController extends Controller
     public function convertHODBToUsefulDB()
     {
         error_log("Started table migration");
-        $sourceUsers = User::limit(500)->get();
+        $sourceUsers = User::limit(1000)->get();
         // required query: create table new_users select * from users limit 0; 
         /* step 1: migrate users table */
         foreach ($sourceUsers as $user) {
@@ -69,7 +69,7 @@ class HOController extends Controller
                 ]);
             }
         }
-        $sourceProducts = Product::limit(5000)->get();
+        $sourceProducts = Product::limit(10000)->get();
         //required query: alter table images add column product_uuid varchar(40);
         /* step 4: update product id and its relation into using uuid */
         foreach ($sourceProducts as $product) {

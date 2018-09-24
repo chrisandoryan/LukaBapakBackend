@@ -18,6 +18,7 @@ class User extends Authenticatable implements JWTSubject
     protected $primaryKey = 'uuid';
     public $timestamps = false;
     protected $table = 'new_users';
+    // protected $table = 'old_users';
     
     public static function boot()
     {
