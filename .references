@@ -10,6 +10,9 @@ create table users select * from lukabapak.users limit 0; //copy table structure
 React JS Dropdown
 https://blog.campvanilla.com/reactjs-dropdown-menus-b6e06ae3a8fe
 
+JWT Auth
+https://medium.com/@Gbxnga/token-based-authentication-with-react-and-laravel-restful-api-83f16581e85
+
 Table Requirements:
 1. invoice
 2. transaction

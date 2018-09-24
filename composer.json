@@ -11,6 +11,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.0.0",
+        "cviebrock/laravel-elasticsearch": "^3.2",
         "fideloper/proxy": "~3.3",
         "kalnoy/nestedset": "^4.3",
         "laravel/framework": "5.5.*",

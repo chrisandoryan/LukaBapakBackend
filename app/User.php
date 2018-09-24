@@ -11,11 +11,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     public $incrementing = false;
     protected $primaryKey = 'uuid';
+    public $timestamps = false;
     protected $table = 'new_users';
     
     public static function boot()
@@ -32,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'name', 'email', 'avatar_url', 'avatar_filename', 'positive_feedback', 'negative_feedback'
+        'username', 'name', 'email', 'avatar_url', 'password', 'avatar_filename', 'positive_feedback', 'negative_feedback'
     ];
 
     /**

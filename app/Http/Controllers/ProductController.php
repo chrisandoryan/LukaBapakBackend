@@ -17,9 +17,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
         //
+        dd($req);
         return ProductResource::collection(Product::with('category')->paginate(15));
     }
 

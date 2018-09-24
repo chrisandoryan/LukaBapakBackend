@@ -15,7 +15,7 @@ class CreateHeaderPromotionsTable extends Migration
     {
         Schema::create('header_promotions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('seller_uuid', 40);
+            // $table->string('seller_uuid', 40);
             $table->string('promo_name', 128);
             $table->date('valid_until');
             $table->foreign('seller_uuid')->references('uuid')->on('new_users');
