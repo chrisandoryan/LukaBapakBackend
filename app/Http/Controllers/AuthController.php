@@ -30,10 +30,11 @@ class AuthController extends Controller
             'username' => $request->username,
             'password' => bcrypt($request->password),
         ]);
+        // uncomment below for auto login after registering
+        // $token = auth()->login($user);
 
-        $token = auth()->login($user);
-
-        return $this->respondWithToken($token, $user);
+        // return $this->respondWithToken($token, $user);
+        
     }
 
     public function login(Request $request)

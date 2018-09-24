@@ -80,4 +80,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(HeaderPromotion::class);
     }   
+
+    public function verifyUser()
+    {
+        return $this->hasOne(VerifyUser::class);
+    }
 }
