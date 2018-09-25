@@ -6,14 +6,33 @@ use App\CartDetail;
 use App\DetailFavorite;
 use App\DetailPromotion;
 use Illuminate\Database\Eloquent\Model;
+use Elasticquent\ElasticquentTrait;
 
 class Product extends Model
 {
+    use ElasticquentTrait;
+
     protected $primaryKey = 'uuid';
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable = ['uuid', 'category_uuid', 'user_uuid'];
     //
+
+    protected $mappingProperties = array(
+        'name' => [
+            'type' => 'text',
+            "analyzer" => "standard",
+        ],
+        'description' => [
+            'type' => 'text',
+            "analyzer" => "standard",
+        ],
+        'product_condition' => [
+            'type' => 'text',
+            "analyzer" => "standard",
+        ],
+    );
+
     public function images()
     {
         return $this->hasMany(Image::class);

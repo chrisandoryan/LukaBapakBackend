@@ -1,5 +1,7 @@
 <?php
 
+use App\Product;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,8 +13,17 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('welcome');
 });
+
+Route::get('/elasticquentproduct', function () {
+    Product::createIndex($shards = null, $replicas = null);
+    Product::putMapping($ignoreConflicts = true);
+    Product::addAllToIndex();
+    echo "Done Mapping to Elasticsearch";
+});
+
+
 
 // Route::get('/', 'HOController@convertHODBToUsefulDB');

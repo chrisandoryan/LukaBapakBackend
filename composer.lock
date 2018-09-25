@@ -4,8 +4,69 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7617c78d009a1a6670242ce01c6a0ecc",
+    "content-hash": "90aa09708f6864e305cbc62ce39dfb4e",
     "packages": [
+        {
+            "name": "cviebrock/laravel-elasticsearch",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cviebrock/laravel-elasticsearch.git",
+                "reference": "ddeda71e48240181d5a31eb76e3b2101832d4dc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cviebrock/laravel-elasticsearch/zipball/ddeda71e48240181d5a31eb76e3b2101832d4dc4",
+                "reference": "ddeda71e48240181d5a31eb76e3b2101832d4dc4",
+                "shasum": ""
+            },
+            "require": {
+                "elasticsearch/elasticsearch": "^6.0",
+                "laravel/framework": "~5.5.0|~5.6.0|~5.7.0",
+                "monolog/monolog": "^1.23",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "limedeck/phpunit-detailed-printer": "^3.2|^4.1",
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
+                "phpunit/phpunit": "^6.2|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cviebrock\\LaravelElasticsearch\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Elasticsearch": "Cviebrock\\LaravelElasticsearch\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cviebrock\\LaravelElasticsearch\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Colin Viebrock",
+                    "email": "colin@viebrock.ca"
+                }
+            ],
+            "description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications.",
+            "homepage": "https://github.com/cviebrock/laravel-elasticsearch",
+            "keywords": [
+                "client",
+                "elasticsearch",
+                "laravel",
+                "search"
+            ],
+            "time": "2018-09-05T03:01:12+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -218,6 +279,119 @@
             "time": "2018-08-16T20:49:45+00:00"
         },
         {
+            "name": "elasticquent/elasticquent",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elasticquent/Elasticquent.git",
+                "reference": "1921d3adf7c3fb332b42dcdf3ad209660fcdd8df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elasticquent/Elasticquent/zipball/1921d3adf7c3fb332b42dcdf3ad209660fcdd8df",
+                "reference": "1921d3adf7c3fb332b42dcdf3ad209660fcdd8df",
+                "shasum": ""
+            },
+            "require": {
+                "elasticsearch/elasticsearch": "~6.0",
+                "illuminate/config": "~4.2|^5",
+                "illuminate/database": "~4.2|^5",
+                "nesbot/carbon": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.2|~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Elasticquent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Fairholm",
+                    "email": "adam.fairholm@gmail.com",
+                    "homepage": "http://adamfairholm.com"
+                }
+            ],
+            "description": "Maps Laravel Eloquent models to Elasticsearch types.",
+            "homepage": "https://github.com/elasticquent/Elasticquent",
+            "keywords": [
+                "elasticsearch",
+                "eloquent",
+                "laravel"
+            ],
+            "time": "2018-03-23T00:18:11+00:00"
+        },
+        {
+            "name": "elasticsearch/elasticsearch",
+            "version": "v6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elastic/elasticsearch-php.git",
+                "reference": "b8e3bc9d1fc54d6a18692df0b74956efe7fe241a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/b8e3bc9d1fc54d6a18692df0b74956efe7fe241a",
+                "reference": "b8e3bc9d1fc54d6a18692df0b74956efe7fe241a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": ">=1.3.7",
+                "guzzlehttp/ringphp": "~1.0",
+                "php": "^7.0",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "cpliakas/git-wrapper": "~1.0",
+                "doctrine/inflector": "^1.1",
+                "mockery/mockery": "0.9.4",
+                "phpstan/phpstan-shim": "0.8.3",
+                "phpunit/phpunit": "6.3.0",
+                "squizlabs/php_codesniffer": "3.0.2",
+                "symfony/finder": "^2.8",
+                "symfony/yaml": "^2.8"
+            },
+            "suggest": {
+                "ext-curl": "*",
+                "monolog/monolog": "Allows for client-level logging and tracing"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Elasticsearch\\": "src/Elasticsearch/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Zachary Tong"
+                }
+            ],
+            "description": "PHP Client for Elasticsearch",
+            "keywords": [
+                "client",
+                "elasticsearch",
+                "search"
+            ],
+            "time": "2017-12-05T14:15:58+00:00"
+        },
+        {
             "name": "erusev/parsedown",
             "version": "1.7.1",
             "source": {
@@ -319,6 +493,107 @@
                 "trusted proxy"
             ],
             "time": "2017-06-15T17:19:42+00:00"
+        },
+        {
+            "name": "guzzlehttp/ringphp",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/RingPHP.git",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/streams": "~3.0",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "time": "2018-07-31T13:22:33+00:00"
+        },
+        {
+            "name": "guzzlehttp/streams",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/streams.git",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple abstraction over streams of data",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "time": "2014-10-12T19:18:40+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -992,16 +1267,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.33.0",
+            "version": "1.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "55667c1007a99e82030874b1bb14d24d07108413"
+                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/55667c1007a99e82030874b1bb14d24d07108413",
-                "reference": "55667c1007a99e82030874b1bb14d24d07108413",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
+                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
                 "shasum": ""
             },
             "require": {
@@ -1043,20 +1318,20 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-08-07T08:39:47+00:00"
+            "time": "2018-09-20T19:36:25+00:00"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d"
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd088dc940a418f09cda079a9b5c7c478890fb8d",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c",
                 "shasum": ""
             },
             "require": {
@@ -1094,7 +1369,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-07-15T17:25:16+00:00"
+            "time": "2018-09-18T07:03:24+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1440,6 +1715,52 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "react/promise",
+            "version": "v2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "f4edc2581617431aea50430749db55cc3fc031b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/f4edc2581617431aea50430749db55cc3fc031b3",
+                "reference": "f4edc2581617431aea50430749db55cc3fc031b3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "time": "2018-06-13T15:59:06+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2530,23 +2851,23 @@
         },
         {
             "name": "tymon/jwt-auth",
-            "version": "1.0.0-rc.2",
+            "version": "1.0.0-rc.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tymondesigns/jwt-auth.git",
-                "reference": "d5220f6a84cbb8300f6f2f0f20aa908d072b4e4b"
+                "reference": "e190b6a75372e7e5e3a6d2cf0e4456313412299f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/d5220f6a84cbb8300f6f2f0f20aa908d072b4e4b",
-                "reference": "d5220f6a84cbb8300f6f2f0f20aa908d072b4e4b",
+                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/e190b6a75372e7e5e3a6d2cf0e4456313412299f",
+                "reference": "e190b6a75372e7e5e3a6d2cf0e4456313412299f",
                 "shasum": ""
             },
             "require": {
-                "illuminate/auth": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/contracts": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/http": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/auth": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/contracts": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/http": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
                 "lcobucci/jwt": "^3.2",
                 "namshi/jose": "^7.0",
                 "nesbot/carbon": "^1.0",
@@ -2554,9 +2875,9 @@
             },
             "require-dev": {
                 "cartalyst/sentinel": "2.0.*",
-                "illuminate/console": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/database": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/routing": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/console": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/database": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/routing": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
                 "mockery/mockery": ">=0.9.9",
                 "phpunit/phpunit": "~4.8 || ~6.0"
             },
@@ -2601,7 +2922,7 @@
                 "jwt",
                 "laravel"
             ],
-            "time": "2018-02-07T20:55:14+00:00"
+            "time": "2018-09-04T19:48:02+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -4440,7 +4761,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "elasticquent/elasticquent": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

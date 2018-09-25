@@ -53,12 +53,17 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user->verified) {
+            return response()->json(['error' => 'Please activate your account first'], 400);
+        }
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token, $user);
     }
 
     protected function respondWithToken($token, $user)

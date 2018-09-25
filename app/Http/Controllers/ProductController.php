@@ -17,11 +17,19 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index(Request $request)
     {
         //
-        dd($req);
-        return ProductResource::collection(Product::with('category')->paginate(15));
+        if ($request->has('category')) {
+            //get products by category
+        }
+        else if ($request->has('search')) {
+            //get products by search keyword
+        }
+        else {
+            //return paginated products
+            return ProductResource::collection(Product::with('category')->paginate(15));
+        }
     }
 
     /**

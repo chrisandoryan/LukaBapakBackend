@@ -18,7 +18,8 @@
         "laravel/tinker": "~1.0",
         "ramsey/uuid": "^3.8",
         "tymon/jwt-auth": "1.0.*",
-        "webpatser/laravel-uuid": "^3.0"
+        "webpatser/laravel-uuid": "^3.0",
+        "elasticquent/elasticquent": "dev-master"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
