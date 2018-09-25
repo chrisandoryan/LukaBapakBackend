@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\PromoResource;
 use App\HeaderPromotion;
+use App\DetailPromotion;
 
 class PromoController extends Controller
 {
@@ -16,6 +17,8 @@ class PromoController extends Controller
     public function index()
     {
         //
+        // dd(DetailPromotion::with(['headerPromotion', 'product'])->get());
+        // return PromoResource::collection(DetailPromotion::with(['headerPromotion', 'product'])->get());
         return PromoResource::collection(HeaderPromotion::all());
     }
 
