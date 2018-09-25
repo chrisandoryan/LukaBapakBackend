@@ -56,11 +56,11 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user->verified) {
-            return response()->json(['error' => 'Please activate your account first'], 400);
+            return response()->json(['message' => 'Please activate your account first']);
         }
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Invalid email or password']);
         }
 
         return $this->respondWithToken($token, $user);

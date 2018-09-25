@@ -9,8 +9,8 @@ class Category extends Model
     //
     protected $primaryKey = 'uuid';
     public $incrementing = false;
-    // protected $table = 'new_categories';
-    protected $table = 'old_categories';
+    protected $table = 'new_categories';
+    // protected $table = 'old_categories';
     public function products()
     {
         return $this->hasMany(Product::class);

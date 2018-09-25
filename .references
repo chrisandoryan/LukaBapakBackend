@@ -27,3 +27,6 @@ Table Requirements:
 11. discussion product id user id parent id
 12. cart header detail
 13. favorite header detail
+
+Randomly assign product as promo product
+insert into detail_promotions values(null, (select uuid from products order by rand() limit 1), now(), now(), 3);
