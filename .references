@@ -30,3 +30,6 @@ Table Requirements:
 
 Randomly assign product as promo product
 insert into detail_promotions values(null, (select uuid from products order by rand() limit 1), now(), now(), 3);
+
+cart
+https://codepen.io/justinklemm/pen/zAdoJ

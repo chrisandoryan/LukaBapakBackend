@@ -16,7 +16,7 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
     public $incrementing = false;
     protected $primaryKey = 'uuid';
-    public $timestamps = false;
+    // public $timestamps = false;
     protected $table = 'new_users';
     // protected $table = 'old_users';
     
@@ -34,7 +34,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'username', 'name', 'email', 'avatar_url', 'password', 'avatar_filename', 'positive_feedback', 'negative_feedback'
+        'username', 'name', 'email', 'origin', 'avatar_url', 'password', 'avatar_filename', 'positive_feedback', 'negative_feedback'
     ];
 
     /**
@@ -84,5 +84,10 @@ class User extends Authenticatable implements JWTSubject
     public function verifyUser()
     {
         return $this->hasOne(VerifyUser::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

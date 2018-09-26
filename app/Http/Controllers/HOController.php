@@ -9,8 +9,13 @@ use App\User;
 use App\Category;
 use App\Product;
 
+use GuzzleHttp\Client;
+
 class HOController extends Controller
 {
+    protected $rajaOngkirUrl = "https://api.rajaongkir.com/starter/";
+    private $rajaOngkirApiKey = "f627e87c6e3c413d3145c7e668b76015";
+
     //Terimakasih ko HO
     public function convertHODBToUsefulDB()
     {
@@ -87,5 +92,43 @@ class HOController extends Controller
         // Post-script query: 
         // delete from images where product_uuid is null;
         // delete from products where uuid is null;
+    }
+
+    public function saveRajaOngkirData()
+    {
+        $client = new Client();
+        $provinces = $client->request('GET', $this->rajaOngkirUrl . "province", [
+            'query' => [
+                'key' => $this->rajaOngkirApiKey,
+            ]
+        ]);
+        $provinces = json_decode($provinces->getBody(), true)['rajaongkir']['results'];
+        // echo "Inserting provinces... ";
+        foreach ($provinces as $key => $value) {
+            // var_dump($value);
+            DB::table('provinces')->insert([
+                'id' => $value['province_id'],
+                'province_name' => $value['province'],
+                'created_at' => now(),
+            ]);
+            $cities = $client->request('GET', $this->rajaOngkirUrl . "city", [
+                'query' => [
+                    'key' => $this->rajaOngkirApiKey,
+                    'province' => $value['province_id']
+                ]
+            ]);
+            $cities = json_decode($cities->getBody(), true)['rajaongkir']['results'];
+            // echo "Inserting cities... ";
+            foreach ($cities as $alsoKey => $alsoValue) {
+                // var_dump($alsoValue['city_name']);
+                DB::table('cities')->insert([
+                    'province_id' => $value['province_id'],
+                    'type' => $alsoValue['type'],
+                    'city_name' => $alsoValue['city_name'],
+                    'created_at' => now(),
+                ]);
+            }
+            echo "OK ";
+        }
     }
 }

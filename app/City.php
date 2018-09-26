@@ -12,4 +12,9 @@ class City extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

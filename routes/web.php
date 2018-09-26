@@ -27,3 +27,4 @@ Route::get('/elasticquentproduct', function () {
 
 
 // Route::get('/', 'HOController@convertHODBToUsefulDB');
+Route::get('/', 'HOController@saveRajaOngkirData');
