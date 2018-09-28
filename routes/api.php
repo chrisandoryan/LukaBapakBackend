@@ -28,3 +28,7 @@ Route::get('/verify/{token}', 'AuthController@activateAccount');
 Route::apiResource('products', 'ProductController');
 Route::apiResource('categories', 'CategoryController');
 Route::apiResource('promotions', 'PromoController');
+
+Route::group(['middleware' => ['jwt.auth']], function () {
+
+});

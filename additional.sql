@@ -85,3 +85,9 @@ create table discussions (
     product_uuid varchar(40),
     content text
 );--consider using node trait?
+
+create table supported_couriers(id int primary key auto_increment, courier_id int unsigned, user_uuid varchar(40), created_at date, updated_at timestamp, foreign key(user_uuid) references new_users(uuid));
+
+create table couriers(id int primary key auto_increment, courier_name varchar(64));
+
+alter table supported_couriers add constraint fk_courier_id foreign key(courier_id) references couriers(id);

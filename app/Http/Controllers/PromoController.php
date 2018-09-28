@@ -41,6 +41,16 @@ class PromoController extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->has('promo_name')) {
+            // var_dump($request->promo_name);
+            $promo = HeaderPromotion::create([
+                'name' => $request->promo_name,
+            ]);
+        }
+        // else if ($request->has('category')) {
+
+        // }
+        return new PromoResource($promo);
     }
 
     /**

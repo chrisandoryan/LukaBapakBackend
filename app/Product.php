@@ -15,12 +15,13 @@ class Product extends Model
     protected $primaryKey = 'uuid';
     public $incrementing = false;
     public $timestamps = false;
+    // public $table = 'old_products';
     protected $fillable = ['uuid', 'category_uuid', 'user_uuid'];
     //
 
     protected $mappingProperties = array(
         'name' => [
-            'type' => 'text',
+            'type' => 'completion',
             "analyzer" => "standard",
         ],
         'description' => [
@@ -28,7 +29,7 @@ class Product extends Model
             "analyzer" => "standard",
         ],
         'product_condition' => [
-            'type' => 'text',
+            'type' => 'keyword',
             "analyzer" => "standard",
         ],
     );
@@ -45,6 +46,7 @@ class Product extends Model
 
     public function category()
     {
+        // return $this->belongsTo(Category::class, 'category_id', 'id');
         return $this->belongsTo(Category::class);
     }
 

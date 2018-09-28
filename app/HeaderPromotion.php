@@ -10,6 +10,8 @@ class HeaderPromotion extends Model
     //
     protected $primaryKey = 'id';
 
+    protected $fillable = ['name'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'seller_uuid');

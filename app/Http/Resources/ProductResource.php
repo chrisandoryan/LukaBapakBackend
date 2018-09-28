@@ -17,7 +17,7 @@ class ProductResource extends Resource
         return [
             'uuid' => $this->uuid,
             // 'category_uuid' => $this->category_uuid,
-            'category' => $this->category->name,
+            'category' => $this->category,
             // 'user_uuid' => $this->user_uuid,
             'user' => $this->user,
             'sold_count' => $this->sold_count,
