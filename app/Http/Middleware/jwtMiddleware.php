@@ -33,5 +33,4 @@ class jwtMiddleware
         }
         return $next($request);
     }
-    }
 }

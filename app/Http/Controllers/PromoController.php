@@ -19,6 +19,7 @@ class PromoController extends Controller
         //
         // dd(DetailPromotion::with(['headerPromotion', 'product'])->get());
         // return PromoResource::collection(DetailPromotion::with(['headerPromotion', 'product'])->get());
+        // dd(HeaderPromotion::find(1)->get()->detailPromotion());
         return PromoResource::collection(HeaderPromotion::all());
     }
 
@@ -47,9 +48,14 @@ class PromoController extends Controller
                 'name' => $request->promo_name,
             ]);
         }
-        // else if ($request->has('category')) {
-
-        // }
+        else if ($request->has('promo_id') && $request->has('product_uuid')) {
+            // dd($request->product_uuid);
+            $promo = DetailPromotion::create([
+                'header_id' => $request->promo_id,
+                'product_uuid' => $request->product_uuid,
+            ]);
+            return response()->json(['message' => 'OK']);
+        }
         return new PromoResource($promo);
     }
 

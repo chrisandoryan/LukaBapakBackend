@@ -17,6 +17,7 @@ class PromoResource extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'created_at' => $this->created_at,
             'products' => $this->detailPromotions,
         ];
     }

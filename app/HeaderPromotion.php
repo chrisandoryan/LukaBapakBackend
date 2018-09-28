@@ -19,6 +19,6 @@ class HeaderPromotion extends Model
 
     public function detailPromotions() 
     {
-        return $this->hasManyThrough(Product::class, DetailPromotion::class, 'header_id', 'uuid', 'id');
+        return $this->hasManyThrough(Product::class, DetailPromotion::class, 'header_id', 'uuid', 'id', 'product_uuid');
     }
 }

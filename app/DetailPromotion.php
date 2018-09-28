@@ -8,6 +8,10 @@ class DetailPromotion extends Model
 {
     //
     protected $primaryKey = 'id';
+    
+    protected $fillable = ['header_id', 'product_uuid'];
+
+    protected $table = 'detail_promotions';
 
     public function product()
     {
