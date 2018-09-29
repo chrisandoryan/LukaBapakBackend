@@ -28,7 +28,7 @@ class ProductController extends Controller
         }
         else {
             //return paginated products
-            return ProductResource::collection(Product::with('category')->paginate(15));
+            return ProductResource::collection(Product::with('category')->with('user.city')->paginate(15));
         }
     }
 

@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::where('parent_uuid', NULL)->get();
+        $categories = Category::where('parent_uuid', null)->get();
 
         return CategoryResource::collection($categories);
     }
@@ -40,6 +40,18 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->parent_uuid == "null") {
+            $category = Category::create([
+                'parent_uuid' => null,
+                'name' => $request->category_name,
+            ]);
+        } else {
+            $category = Category::create([
+                'parent_uuid' => $request->parent_uuid,
+                'name' => $request->category_name,
+            ]);
+        }
+        return new CategoryResource($category);
     }
 
     /**
