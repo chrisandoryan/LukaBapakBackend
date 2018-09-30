@@ -95,4 +95,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(SupportedCourier::class);
     }
+
+    public function detailFavorites()
+    {
+        return $this->hasMany(DetailFavorite::class);
+    }
 }

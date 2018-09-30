@@ -17,7 +17,9 @@ class FavoriteProductController extends Controller
     public function index()
     {
         //
-        dd("HUAHAHAHAHAHA");
+        $user = auth()->userOrFail();
+        $faves = DetailFavorite::where('user_uuid', $user->uuid)->with('product')->paginate(15);
+        return FavoriteProductResource::collection($faves);
     }
 
     /**
@@ -39,12 +41,13 @@ class FavoriteProductController extends Controller
     public function store(Request $request)
     {
         //
+        // var_dump($request->product_uuid);
         $user = auth()->userOrFail();
-        $favoriteHeader = HeaderFavorite::create([
-            'user_uuid' => $user->uuid,
-        ]);
+        // $favoriteHeader = HeaderFavorite::create([
+        //     'user_uuid' => $user->uuid,
+        // ]);
         $favoriteDetail = DetailFavorite::create([
-            'header_id' => $favoriteHeader->id,
+            'user_uuid' => $user->uuid,
             'product_uuid' => $request->product_uuid,            
         ]);
         
