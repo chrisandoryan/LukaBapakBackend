@@ -8,10 +8,18 @@ use Illuminate\Support\Facades\Validator;
 use App\Mail\EmailActivation;
 use App\VerifyUser;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+
 
 class AuthController extends Controller
 {
     //
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'me']]);
+    }
+
     public function register(Request $request)
     {
         // return $request;
@@ -53,24 +61,30 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user->verified) {
-            return response()->json(['message' => 'Please activate your account first']);
-        }
+        // $user = User::where('email', $request->email)->where('password', bcrypt($request->password))->first();
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['message' => 'Invalid email or password']);
         }
 
-        return $this->respondWithToken($token, $user);
+        return $this->respondWithToken($token);
     }
 
-    protected function respondWithToken($token, $user)
+    public function logout()
+    {
+        auth()->logout();
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
+
+    protected function respondWithToken($token)
     {
         return response()->json([
             'success' => true,
-            'data' => $user,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
@@ -94,5 +108,15 @@ class AuthController extends Controller
         }
 
         return $status;
+    }
+
+    public function meFromToken()
+    {
+        try {
+            $user = auth()->userOrFail();
+            return response()->json($user);
+        } catch (MethodNotAllowedHttpException $e) {
+            return response()->json($e);
+        }
     }
 }
