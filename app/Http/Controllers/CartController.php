@@ -17,7 +17,7 @@ class CartController extends Controller
     {
         //
         $user = auth()->userOrFail();
-        return CartResource::collection(CartDetail::where('user_uuid', $user->uuid)->with('product')->paginate(15));
+        return CartResource::collection(CartDetail::where('user_uuid', $user->uuid)->with('product')->with('product.user')->paginate(15));
 
     }
 

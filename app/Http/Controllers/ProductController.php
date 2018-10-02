@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -21,12 +22,16 @@ class ProductController extends Controller
     {
         //
         if ($request->has('category')) {
-            //get products by category
-        }
-        else if ($request->has('search')) {
+            try {
+                $category = Category::find($request->category);
+
+                return ProductResource::collection($category->products);
+            }
+            catch (\Exception $e) {
+                return response()->json(['message' => $e]);
+            }
             //get products by search keyword
-        }
-        else {
+        } else {
             //return paginated products
             return ProductResource::collection(Product::with('category')->with('user.city')->paginate(15));
         }
