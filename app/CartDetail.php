@@ -20,4 +20,9 @@ class CartDetail extends Model
     {
         return $this->belongsTo(Product::class, 'product_uuid', 'uuid');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
+    }
 }

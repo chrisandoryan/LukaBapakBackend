@@ -30,6 +30,8 @@ Route::get('logout', 'AuthController@logout')->name('logout');
 Route::apiResource('products', 'ProductController');
 Route::apiResource('categories', 'CategoryController');
 Route::apiResource('promotions', 'PromoController');
+Route::get('payment/download', 'CartController@export');
+
 
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::post('me', 'AuthController@meFromToken')->name('me');

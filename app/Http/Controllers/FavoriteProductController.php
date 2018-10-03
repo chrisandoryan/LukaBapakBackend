@@ -86,6 +86,9 @@ class FavoriteProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $toUpdate = Product::find($id);
+        // $toUpdate->name = $request->name;
+        // $toUpdate->save();
     }
 
     /**

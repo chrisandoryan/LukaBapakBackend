@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\CartResource;
 use App\CartDetail;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CartExport;
 
 class CartController extends Controller
 {
+    public function export()
+    {
+        $user = auth()->userOrFail();
+        return Excel::download(new CartExport($user), 'users.xlsx');
+    }
+
     /**
      * Display a listing of the resource.
      *
