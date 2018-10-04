@@ -24,8 +24,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', 'AuthController@register')->name('register');
 Route::post('login', 'AuthController@login')->name('login');
 Route::get('logout', 'AuthController@logout')->name('logout');
+Route::get('admin', 'AuthController@getAdmins')->name('getAdmins');
+Route::post('admin/invite', 'AuthController@inviteAdmin')->name('inviteAdmin');
 
-// Route::get('/verify/{token}', 'AuthController@activateAccount'); //not asked lol, i'm improvise
+Route::get('/verify/{token}', 'AuthController@activateAccount'); //not asked lol, i'm improvise
 
 Route::apiResource('products', 'ProductController');
 Route::apiResource('categories', 'CategoryController');

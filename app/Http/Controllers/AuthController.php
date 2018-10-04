@@ -17,7 +17,16 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'me']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'me', 'inviteAdmin']]);
+    }
+
+    public function inviteAdmin(Request $request) {
+        try {
+            $user = User::where('email', $request->email);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'User not found!']);
+        }
+        Mail::to($request->email)->send(new EmailActivation($user));
     }
 
     public function register(Request $request)
@@ -96,12 +105,12 @@ class AuthController extends Controller
         $verifyUser = VerifyUser::where('token', $token)->first();
         if (isset($verifyUser)) {
             $user = $verifyUser->user;
-            if (!$user->verified) {
-                $verifyUser->user->verified = 1;
+            if (!$user->is_admin) {
+                $verifyUser->user->is_admin = 1;
                 $verifyUser->user->save();
-                $status = "Your e-mail is verified. You can now login.";
+                $status = "You are now Admin.";
             } else {
-                $status = "Your e-mail is already verified. You can now login.";
+                $status = "You already are an Admin.";
             }
         } else {
             $status = "Sorry your email cannot be identified.";

@@ -24,8 +24,9 @@ class ProductController extends Controller
         if ($request->has('category')) {
             try {
                 $category = Category::find($request->category);
+                $products = Product::where('category_uuid', $category->uuid)->paginate(15);
 
-                return ProductResource::collection($category->products);
+                return ProductResource::collection($products);
             }
             catch (\Exception $e) {
                 return response()->json(['message' => $e]);

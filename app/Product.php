@@ -12,10 +12,11 @@ class Product extends Model
 {
     use ElasticquentTrait;
 
-    protected $primaryKey = 'uuid';
+    protected $primaryKey = 'uuid'; //before uuid
     public $incrementing = false;
     public $timestamps = false;
-    // public $table = 'old_products';
+    public $table = 'products';
+    
     protected $fillable = ['uuid', 'category_uuid', 'user_uuid'];
     //
 
@@ -41,7 +42,7 @@ class Product extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     public function category()

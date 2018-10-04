@@ -24,5 +24,5 @@ Route::get('/elasticquentproduct', function () {
     echo "Done Mapping to Elasticsearch";
 });
 
-// Route::get('/', 'HOController@convertHODBToUsefulDB');
+Route::get('/', 'HOController@convertHODBToUsefulDB');
 // Route::get('/', 'HOController@saveRajaOngkirData');

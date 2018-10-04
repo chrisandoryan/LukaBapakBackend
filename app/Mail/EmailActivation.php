@@ -22,6 +22,7 @@ class EmailActivation extends Mailable
         //
         $this->user = $user;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     }
+    
 
     /**
      * Build the message.

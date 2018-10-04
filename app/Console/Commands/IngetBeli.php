@@ -52,7 +52,7 @@ class IngetBeli extends Command
                 'seller' => $value[0]->product->user
             ];
 
-            error_log($value);
+            // error_log($value);
 
             Mail::to($key)->send(new EmailNotifyCart($data));
         }

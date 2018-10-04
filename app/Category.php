@@ -10,11 +10,11 @@ class Category extends Model
     //
     protected $primaryKey = 'uuid';
     public $incrementing = false;
-    protected $table = 'newer_categories';
+    // protected $table = 'newer_categories';
     public $timestamps = false;
-    // protected $table = 'old_categories';
+    protected $table = 'categories';
 
-    protected $fillable = ['parent_uuid', 'name'];
+    protected $fillable = ['uuid', 'parent_uuid', 'name'];
 
     public static function boot()
     {
@@ -30,8 +30,8 @@ class Category extends Model
     }
     public function parent()
     {
-        // return $this->belongsTo(Category::class, 'parent_uuid', 'uuid');
-        return $this->belongsTo(Category::class, 'parent_id', 'id'); // uncomment this to migrate from HODB
+        return $this->belongsTo(Category::class, 'parent_uuid', 'uuid');
+        // return $this->belongsTo(Category::class, 'parent_id', 'id'); // uncomment this to migrate from HODB
     }
     public function children()
     {
