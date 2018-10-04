@@ -21,11 +21,13 @@ class AuthController extends Controller
     }
 
     public function inviteAdmin(Request $request) {
-        try {
-            $user = User::where('email', $request->email);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'User not found!']);
-        }
+            // dd($request->email);
+            $user = User::where('email', $request->email)->first();
+            // dd($user->email);
+            $verifyUser = VerifyUser::create([
+                'user_uuid' => $user->uuid,
+                'token' => str_random(40),
+            ]);
         Mail::to($request->email)->send(new EmailActivation($user));
     }
 
@@ -56,12 +58,12 @@ class AuthController extends Controller
 
         // return $this->respondWithToken($token, $user);
 
-        $verifyUser = VerifyUser::create([
-            'user_uuid' => $user->uuid,
-            'token' => str_random(40),
-        ]);
+        // $verifyUser = VerifyUser::create([
+        //     'user_uuid' => $user->uuid,
+        //     'token' => str_random(40),
+        // ]);
 
-        Mail::to($user->email)->send(new EmailActivation($user));
+        // Mail::to($user->email)->send(new EmailActivation($user));
 
         return $user;
 
