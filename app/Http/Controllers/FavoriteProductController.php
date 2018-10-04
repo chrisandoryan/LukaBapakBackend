@@ -18,7 +18,7 @@ class FavoriteProductController extends Controller
     {
         //
         $user = auth()->userOrFail();
-        $faves = DetailFavorite::where('user_uuid', $user->uuid)->with('product')->paginate(15);
+        $faves = DetailFavorite::where('user_uuid', $user->uuid)->with('product')->with('product.user')->paginate(15);
         return FavoriteProductResource::collection($faves);
     }
 
@@ -97,8 +97,13 @@ class FavoriteProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
         //
+        $user = auth()->userOrFail();
+        $fave = DetailFavorite::where('product_uuid', $uuid)->where('user_uuid', $user->uuid);
+        $fave->delete();
+
+        return response()->json(['message' => 'OK']);
     }
 }

@@ -22,7 +22,8 @@ Route::get('/elasticquentproduct', function () {
     Product::putMapping($ignoreConflicts = true);
     Product::addAllToIndex();
     echo "Done Mapping to Elasticsearch";
+    // Product::rebuildMapping();
 });
 
-Route::get('/', 'HOController@convertHODBToUsefulDB');
+// Route::get('/', 'HOController@convertHODBToUsefulDB');
 // Route::get('/', 'HOController@saveRajaOngkirData');

@@ -32,6 +32,9 @@ class ProductController extends Controller
                 return response()->json(['message' => $e]);
             }
             //get products by search keyword
+        } else if ($request->has('search')) {
+            $products = Product::searchByQuery(array('match' => array('name' => $request->search)));
+            return ProductResource::collection($products);
         } else {
             //return paginated products
             return ProductResource::collection(Product::with('category')->with('user.city')->paginate(15));
@@ -88,6 +91,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        // $product->visit();
         return new ProductResource($product);
     }
 

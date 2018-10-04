@@ -7,10 +7,12 @@ use App\DetailFavorite;
 use App\DetailPromotion;
 use Illuminate\Database\Eloquent\Model;
 use Elasticquent\ElasticquentTrait;
+use \JordanMiguel\LaravelPopular\Traits\Visitable;
 
 class Product extends Model
 {
     use ElasticquentTrait;
+    use Visitable;
 
     protected $primaryKey = 'uuid'; //before uuid
     public $incrementing = false;
@@ -22,7 +24,7 @@ class Product extends Model
 
     protected $mappingProperties = array(
         'name' => [
-            'type' => 'completion',
+            'type' => 'text',
             "analyzer" => "standard",
         ],
         'description' => [
@@ -30,7 +32,7 @@ class Product extends Model
             "analyzer" => "standard",
         ],
         'product_condition' => [
-            'type' => 'keyword',
+            'type' => 'text',
             "analyzer" => "standard",
         ],
     );
