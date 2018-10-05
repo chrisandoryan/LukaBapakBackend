@@ -5,13 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class HeaderReview extends Model
+class HeaderDiscussion extends Model
 {
     //
-    protected $table = 'header_review';
-    public $timestamps = false;
-    protected $fillable = ['product_uuid'];
-
     public static function boot()
     {
         parent::boot();
@@ -20,13 +16,11 @@ class HeaderReview extends Model
         });
     }
 
+    protected $table = 'header_discussion';
+    protected $fillable = [''];
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_uuid', 'uuid');
-    }
-
-    public function detailReview()
-    {
-        return $this->hasMany(DetailReview::class, 'header_id', 'id');
     }
 }

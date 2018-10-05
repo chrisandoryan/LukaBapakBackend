@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\HeaderReview;
-use App\DetailReview;
-use App\Http\Resources\ReviewResource;
+use App\HeaderDiscussion;
+use App\Http\Resources\DiscussionResource;
+use App\DetailDiscussion;
 
-class ReviewController extends Controller
+class DiscussionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,8 @@ class ReviewController extends Controller
     public function index(Request $request)
     {
         //
-        if ($request->has('product_uuid')) {
-            $header = HeaderReview::where('product_uuid', $request->product_uuid)->with('detailReview')->with('detailReview.user')->get();
-            return ReviewResource::collection($header);
-        }
+        $discussions = HeaderDiscussion::where('product_uuid', $request->product_uuid);
+        DiscussionResource::collection($discussions);
     }
 
     /**
@@ -42,7 +40,7 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         //
-        $header = HeaderReview::where('product_uuid', $request->product_uuid)->first();
+        $header = HeaderDiscussion::where('product_uuid', $request->product_uuid)->first();
         if (!$header) {
             $header = HeaderReview::create([
                 'product_uuid' => $request->product_uuid,
@@ -50,9 +48,10 @@ class ReviewController extends Controller
         }
         $user = auth()->userOrFail();
         // dd($request->message);
-        $detail = DetailReview::create([
+        $detail = DetailDiscussion::create([
             'header_id' => $header->id,
             'user_uuid' => $user->uuid,
+            'parent_id' => $request->parent_id ? $request->parent_id : null,
             'message' => $request->message,
         ]);
     }

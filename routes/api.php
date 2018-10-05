@@ -33,6 +33,8 @@ Route::apiResource('categories', 'CategoryController');
 Route::apiResource('promotions', 'PromoController');
 Route::get('payment/download', 'CartController@export');
 
+Route::apiResource('discussions', 'DiscussionController');
+
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::post('me', 'AuthController@meFromToken')->name('me');
     Route::apiResource('favorites', 'FavoriteProductController');
