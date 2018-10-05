@@ -8,7 +8,7 @@ class DetailDiscussion extends Model
 {
     //
     protected $table = 'detail_discussions';
-    protected $fillable = [''];
+    protected $fillable = ['header_id', 'user_uuid', 'parent_id', 'message'];
 
     public function parent()
     {

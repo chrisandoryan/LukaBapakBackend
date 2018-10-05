@@ -17,8 +17,13 @@ class DiscussionController extends Controller
     public function index(Request $request)
     {
         //
-        $discussions = HeaderDiscussion::where('product_uuid', $request->product_uuid);
-        DiscussionResource::collection($discussions);
+        $discussions = HeaderDiscussion::where('product_uuid', $request->product_uuid)
+                                            ->with('detailDiscussion')
+                                            ->with('detailDiscussion.user')
+                                            ->with('detailDiscussion.child')
+                                            ->with('detailDiscussion.child.user')->get();
+
+        return DiscussionResource::collection($discussions);
     }
 
     /**
@@ -42,7 +47,7 @@ class DiscussionController extends Controller
         //
         $header = HeaderDiscussion::where('product_uuid', $request->product_uuid)->first();
         if (!$header) {
-            $header = HeaderReview::create([
+            $header = HeaderDiscussion::create([
                 'product_uuid' => $request->product_uuid,
             ]);
         }
@@ -51,7 +56,7 @@ class DiscussionController extends Controller
         $detail = DetailDiscussion::create([
             'header_id' => $header->id,
             'user_uuid' => $user->uuid,
-            'parent_id' => $request->parent_id ? $request->parent_id : null,
+            'parent_id' => $request->parent_id != "null" ? $request->parent_id : null,
             'message' => $request->message,
         ]);
     }

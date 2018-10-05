@@ -16,11 +16,17 @@ class HeaderDiscussion extends Model
         });
     }
 
-    protected $table = 'header_discussion';
-    protected $fillable = [''];
+    protected $table = 'header_discussions';
+    protected $fillable = ['product_uuid'];
+    public $timestamps = false;
 
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_uuid', 'uuid');
+    }
+
+    public function detailDiscussion()
+    {
+        return $this->hasMany(DetailDiscussion::class, 'header_id', 'id');
     }
 }
