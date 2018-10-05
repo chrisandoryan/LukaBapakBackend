@@ -9,7 +9,7 @@
 <br/>
 Klik link dibawah ini untuk menerima invitasi.
 <br/>
-<a href="{{url('users/verify', $user->verifyUser->token)}}">Become Admin</a>
+<a href="{{url('api/admin/verify', $user->verifyUser->token)}}">Become Admin</a>
 </body>
  
 </html>

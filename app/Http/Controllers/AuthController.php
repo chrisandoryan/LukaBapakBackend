@@ -17,7 +17,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'me', 'inviteAdmin']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'activateAccount', 'me', 'inviteAdmin']]);
     }
 
     public function inviteAdmin(Request $request) {
@@ -102,7 +102,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function activateAccount()
+    public function activateAccount($token)
     {
         $verifyUser = VerifyUser::where('token', $token)->first();
         if (isset($verifyUser)) {
