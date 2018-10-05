@@ -60,14 +60,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $user = auth()->userOrFail();
+
         $product = Product::create([
             'category_id' => $request->category_id,
-            'user_id' => $request->user()->id,
-            'sold_count' => $request->sold_count,
-            'video_url' => $request->video_url,
-            'assurance' => $request->assurance,
-            'bl_id' => $request->bl_id,
-            'url' => $request->url,
+            'user_uuid' => $user->uuid,
+            'sold_count' => 0,
+            'video_url' => 'https://youtube.com/dmaumdshai',
+            'assurance' => 1,
+            'bl_id' => 'aaa',
+            'url' => 'uuu',
             'name' => $request->name,
             'city' => $request->city,
             'province' => $request->province,
@@ -76,7 +78,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'product_condition' => $request->product_condition,
             'stock' => $request->stock,
-            'view_count' => $request->view_count,
+            'view_count' => 0,
         ]);
 
         return new ProductResource($product);

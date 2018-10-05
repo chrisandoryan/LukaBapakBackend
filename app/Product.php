@@ -18,7 +18,15 @@ class Product extends Model
     public $incrementing = false;
     public $timestamps = false;
     public $table = 'products';
-    
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->uuid = Uuid::uuid4();
+        });
+    }
+
     protected $fillable = ['uuid', 'category_uuid', 'user_uuid'];
     //
 
