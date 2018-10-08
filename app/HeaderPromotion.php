@@ -10,7 +10,7 @@ class HeaderPromotion extends Model
     //
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'is_active'];
 
     public function user()
     {

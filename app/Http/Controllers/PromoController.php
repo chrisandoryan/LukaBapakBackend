@@ -14,13 +14,13 @@ class PromoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         // dd(DetailPromotion::with(['headerPromotion', 'product'])->get());
         // return PromoResource::collection(DetailPromotion::with(['headerPromotion', 'product'])->get());
         // dd(HeaderPromotion::find(1)->get()->detailPromotion());
-        return PromoResource::collection(HeaderPromotion::all());
+        return PromoResource::collection(HeaderPromotion::where('is_active', 1)->get());
     }
 
     /**
@@ -46,6 +46,7 @@ class PromoController extends Controller
             // var_dump($request->promo_name);
             $promo = HeaderPromotion::create([
                 'name' => $request->promo_name,
+                'is_active' => 1,
             ]);
         }
         else if ($request->has('promo_id') && $request->has('product_uuid')) {
@@ -68,6 +69,8 @@ class PromoController extends Controller
     public function show($id)
     {
         //
+        $header = HeaderPromotion::where('id', $id)->with('detailPromotions')->with('detailPromotions.user')->get();
+        return PromoResource::collection($header);
     }
 
     /**
@@ -102,5 +105,10 @@ class PromoController extends Controller
     public function destroy($id)
     {
         //
+        $promo = HeaderPromotion::find($id);
+        $promo->is_active = 0;
+        $promo->save();
+        
+        return PromoResource::collection($promo->get());
     }
 }
