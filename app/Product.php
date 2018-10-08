@@ -3,6 +3,7 @@
 namespace App;
 
 use App\CartDetail;
+use Ramsey\Uuid\Uuid;
 use App\DetailFavorite;
 use App\DetailPromotion;
 use Illuminate\Database\Eloquent\Model;
@@ -28,6 +29,7 @@ class Product extends Model
     }
 
     protected $fillable = ['uuid', 'category_uuid', 'user_uuid'];
+    // protected $fillable = [‘*’];
     //
 
     protected $mappingProperties = array(
@@ -47,7 +49,7 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasOne(Image::class);
     }
 
     public function user()

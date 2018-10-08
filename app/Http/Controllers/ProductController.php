@@ -61,9 +61,11 @@ class ProductController extends Controller
     {
         //
         $user = auth()->userOrFail();
-
+        Product::unguard();
         $product = Product::create([
-            'category_id' => $request->category_id,
+            'id' => 999,
+            'user_id' => 999,
+            'category_uuid' => $request->category_id,
             'user_uuid' => $user->uuid,
             'sold_count' => 0,
             'video_url' => 'https://youtube.com/dmaumdshai',
@@ -76,10 +78,12 @@ class ProductController extends Controller
             'price' => $request->price,
             'weight' => $request->weight,
             'description' => $request->description,
-            'product_condition' => $request->product_condition,
+            'product_condition' => $request->condition,
             'stock' => $request->stock,
             'view_count' => 0,
         ]);
+
+        Product::reguard();
 
         return new ProductResource($product);
     }

@@ -34,6 +34,7 @@ class ProductResource extends Resource
             'product_condition' => $this->product_condition,
             'stock' => $this->stock,
             'view_count' => $this->view_count,
+            'image' => $this->images,
         ];
     }
 }
