@@ -16,7 +16,7 @@ class VoucherController extends Controller
     public function index()
     {
         //
-        return VoucherResource::collection(Voucher::all()->get());
+        return VoucherResource::collection(Voucher::all());
     }
 
     /**
@@ -41,6 +41,7 @@ class VoucherController extends Controller
         $voucher = Voucher::create([
             'code' => $request->code,
             'name' => $request->name,
+            'price_cut' => $request->price_cut,
         ]);
 
         return VoucherResource::collection($voucher->get());
@@ -78,6 +79,10 @@ class VoucherController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // dd($request->new_price);
+        $voucher = Voucher::find($id);
+        $voucher->price_cut = $request->new_price;
+        $voucher->save();
     }
 
     /**
@@ -89,5 +94,8 @@ class VoucherController extends Controller
     public function destroy($id)
     {
         //
+        $voucher = Voucher::where('uuid', $id);
+        $voucher->delete();
+        return response()->json(['message' => 'OK']);
     }
 }

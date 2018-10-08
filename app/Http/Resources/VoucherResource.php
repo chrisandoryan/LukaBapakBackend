@@ -15,5 +15,9 @@ class VoucherResource extends Resource
     public function toArray($request)
     {
         return parent::toArray($request);
+        // dd($this->uuid);
+        // return [
+        //     'uuid' => $this->uuid,
+        // ];
     }
 }

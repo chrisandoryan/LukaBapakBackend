@@ -8,7 +8,9 @@ use Ramsey\Uuid\Uuid;
 class Voucher extends Model
 {
     //
-    protected $fillable = ['uuid', 'code', 'name'];
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+    protected $fillable = ['uuid', 'code', 'name', 'price_cut'];
 
     public static function boot()
     {

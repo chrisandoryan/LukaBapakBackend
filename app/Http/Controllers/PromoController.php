@@ -94,6 +94,10 @@ class PromoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // dd($request->new_name);
+        $voucher = HeaderPromotion::find($id);
+        $voucher->name = $request->new_name;
+        $voucher->save();
     }
 
     /**
