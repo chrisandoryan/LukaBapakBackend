@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\EmailActivation;
@@ -72,10 +73,34 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
+        // dd($credentials);
         // $user = User::where('email', $request->email)->where('password', bcrypt($request->password))->first();
-
+        if ($request->mode == "phone") {
+            $user = User::where('phone', $request->email)->first();
+            if (!$user) {
+                return response()->json(['message' => 'Invalid email or password']);
+            }
+            else if (Hash::check($request->password, $user->password)) {
+                $credentials = ['email' => $user->email, 'password' => $request->password];
+            }
+        }
+        else if ($request->mode == "email") {
+            if (!$token = auth()->attempt($credentials)) {
+                return response()->json(['message' => 'Invalid email or password']);    
+            }
+        }
+        else if ($request->mode == "username") {
+            $user = User::where('username', $request->email)->first();
+            if ($user == null) {
+                return response()->json(['message' => 'Invalid email or password']);
+            }
+            else if (Hash::check($request->password, $user->password)) {
+                $credentials = ['email' => $user->email, 'password' => $request->password];
+            }
+        }
+        // dd($credentials);
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['message' => 'Invalid email or password']);
+            return response()->json(['message' => 'Invalid email or passwordtoken']);
         }
 
         return $this->respondWithToken($token);
