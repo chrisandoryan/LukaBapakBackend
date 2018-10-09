@@ -167,6 +167,7 @@ return [
         // Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         // Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
+        'Img' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

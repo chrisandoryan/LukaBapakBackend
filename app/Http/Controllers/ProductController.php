@@ -6,6 +6,8 @@ use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
 use App\Category;
+use Intervention\Image\Facades\Image as Img;
+use App\Image;
 
 class ProductController extends Controller
 {
@@ -84,6 +86,17 @@ class ProductController extends Controller
         ]);
 
         Product::reguard();
+
+        $image = $request->get('image');
+        $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+        Img::make($image)->save(public_path('images/').$name);
+
+        $upload = Image::create([
+            'product_uuid' => $product->uuid,
+            'product_id' => 999,
+            'url' => "http://localhost:8000/api/images/" . $name,
+            'filename' => $name,
+        ]);
 
         return new ProductResource($product);
     }
