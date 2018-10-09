@@ -20,7 +20,7 @@ class PromoController extends Controller
         // dd(DetailPromotion::with(['headerPromotion', 'product'])->get());
         // return PromoResource::collection(DetailPromotion::with(['headerPromotion', 'product'])->get());
         // dd(HeaderPromotion::find(1)->get()->detailPromotion());
-        return PromoResource::collection(HeaderPromotion::where('is_active', 1)->get());
+        return PromoResource::collection(HeaderPromotion::where('is_active', 1)->with('detailPromotions.images')->get());
     }
 
     /**
@@ -69,7 +69,7 @@ class PromoController extends Controller
     public function show($id)
     {
         //
-        $header = HeaderPromotion::where('id', $id)->with('detailPromotions')->with('detailPromotions.user')->get();
+        $header = HeaderPromotion::where('id', $id)->with('detailPromotions')->with('detailPromotions.user')->with('detailPromotions.images')->get();
         return PromoResource::collection($header);
     }
 
