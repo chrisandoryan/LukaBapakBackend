@@ -7,14 +7,32 @@ use App\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Http\Resources\CartResource;
 
-class CartExport implements FromCollection
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+
+class CartExport implements FromCollection, WithMapping, WithHeadings
 {
     protected $user;
-    public function headings(): array
+    public function map($detail) : array
     {
         return [
-            '#',
+            $detail->id,
+            $detail->product->name,
+            $detail->amount,
+            $detail->note,
+            $detail->created_at,
+        ];
+    }
+    public function headings() : array
+    {
+        return [
+            'No',
+            'Product',
+            'Amount',
             'Date',
+            'Note'
         ];
     }
     public function __construct(User $user)
@@ -22,10 +40,10 @@ class CartExport implements FromCollection
         $this->user = $user;
     }
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-        return CartDetail::where('user_uuid', $this->user->uuid)->get();
+        return CartDetail::where('user_uuid', $this->user->uuid)->with('product')->with('user')->get();
     }
 }
