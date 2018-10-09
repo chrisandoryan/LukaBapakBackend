@@ -1,0 +1,49 @@
+{
+    "settings": {
+        "index": {
+            "analysis": {
+                "filter": {},
+                "analyzer": {
+                    "analyzer_keyword": {
+                        "tokenizer": "keyword",
+                        "filter": "lowercase"
+                    },
+                    "edge_ngram_analyzer": {
+                        "filter": [
+                            "lowercase"
+                        ],
+                        "tokenizer": "edge_ngram_tokenizer"
+                    }
+                },
+                "tokenizer": {
+                    "edge_ngram_tokenizer": {
+                        "type": "edge_ngram",
+                        "min_gram": 2,
+                        "max_gram": 5,
+                        "token_chars": [
+                            "letter"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "mappings": {
+        "products": {
+            "properties": {
+                "name": {
+                    "type": "text",
+                    "analyzer": "edge_ngram_analyzer"
+                },
+                "product_condition": {
+                    "type": "text",
+                    "analyzer": "standard"
+                },
+                "description": {
+                    "type": "text",
+                    "analyzer": "standard"
+                }
+            }
+        }
+    }
+}

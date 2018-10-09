@@ -18,7 +18,7 @@ Route::get('/', function() {
 });
 
 Route::get('/elasticquentproduct', function () {
-    Product::createIndex($shards = null, $replicas = null);
+    // Product::createIndex($shards = null, $replicas = null);
     Product::putMapping($ignoreConflicts = true);
     Product::addAllToIndex();
     echo "Done Mapping to Elasticsearch";

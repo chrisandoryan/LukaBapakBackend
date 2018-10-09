@@ -35,7 +35,7 @@ class Product extends Model
     protected $mappingProperties = array(
         'name' => [
             'type' => 'text',
-            "analyzer" => "standard",
+            "analyzer" => "edge_ngram_analyzer",
         ],
         'description' => [
             'type' => 'text',
