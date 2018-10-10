@@ -31,8 +31,8 @@ class CartExport implements FromCollection, WithMapping, WithHeadings
             'No',
             'Product',
             'Amount',
-            'Date',
-            'Note'
+            'Note',
+            'Date'
         ];
     }
     public function __construct(User $user)
