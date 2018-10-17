@@ -42,4 +42,6 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     Route::apiResource('reviews', 'ReviewController');
     Route::apiResource('discussions', 'DiscussionController');
     Route::apiResource('images', 'ImageController');
+    Route::apiResource('transactions', 'TransactionController');
+    Route::post('header-transaction', 'TransactionController@addHeader');
 });

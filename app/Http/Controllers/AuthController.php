@@ -100,7 +100,7 @@ class AuthController extends Controller
         }
         // dd($credentials);
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['message' => 'Invalid email or password']);
+            return response()->json(['message' => 'Invalid email or password'], 400);
         }
 
         return $this->respondWithToken($token);

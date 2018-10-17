@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image as Img;
-use App\Http\Resources\VoucherResource;
-use App\Voucher;
+use App\HeaderTransaction;
+use App\DetailTransaction;
 
-class VoucherController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,6 @@ class VoucherController extends Controller
     public function index()
     {
         //
-        return VoucherResource::collection(Voucher::all());
     }
 
     /**
@@ -29,6 +27,20 @@ class VoucherController extends Controller
     {
         //
     }
+    
+    public function addHeader(Request $request) 
+    {
+        $user = auth()->userOrFail();
+        // var_dump($request->seller_id);
+        $header = HeaderTransaction::create([
+            'seller_uuid' => $request->seller_id,
+            'buyer_uuid' => $user->uuid,
+            'status_id' => 0,
+            'delivery_address' => $request->address,
+        ]);
+
+        return response()->json($header);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,18 +51,13 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
-        $image = $request->get('image');
-        $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-        Img::make($image)->save(public_path('vouchers/').$name);
-
-        $voucher = Voucher::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'price_cut' => $request->price_cut,
-            'image_url' => $name,
+        $user = auth()->userOrFail();
+    
+        $detail = DetailTransaction::create([
+            'header_id' => $request->header_id,
+            'product_uuid' => $request->product_id,
+            'amount' => $request->amount,
         ]);
-
-        return VoucherResource::collection($voucher->get());
     }
 
     /**
@@ -85,10 +92,6 @@ class VoucherController extends Controller
     public function update(Request $request, $id)
     {
         //
-        // dd($request->new_price);
-        $voucher = Voucher::find($id);
-        $voucher->price_cut = $request->new_price;
-        $voucher->save();
     }
 
     /**
@@ -100,8 +103,5 @@ class VoucherController extends Controller
     public function destroy($id)
     {
         //
-        $voucher = Voucher::where('uuid', $id);
-        $voucher->delete();
-        return response()->json(['message' => 'OK']);
     }
 }

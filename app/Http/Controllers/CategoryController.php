@@ -97,5 +97,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        // $voucher = Voucher::where('uuid', $id);
+        $category->delete();
+        return response()->json(['message' => 'OK']);
     }
 }
