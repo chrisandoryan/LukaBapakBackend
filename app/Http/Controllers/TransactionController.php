@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\HeaderTransaction;
 use App\DetailTransaction;
+use App\Http\Resources\TransactionResource;
 
 class TransactionController extends Controller
 {
@@ -16,6 +17,13 @@ class TransactionController extends Controller
     public function index()
     {
         //
+        $user = auth()->userOrFail();
+        $orders= HeaderTransaction::where('seller_uuid', $user->uuid)->with('detailTransactions')
+                                                        ->with('detailTransactions.product')
+                                                        ->with('user')
+                                                        ->get();
+
+        return TransactionResource::collection($orders);
     }
 
     /**
