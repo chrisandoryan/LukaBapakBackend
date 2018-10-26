@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'activateAccount', 'me', 'inviteAdmin']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'activateAccount', 'me', 'inviteAdmin', 'checkUsername']]);
     }
 
     public function inviteAdmin(Request $request) {
@@ -104,6 +104,17 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+    }
+
+    public function checkUsername($username) {
+        $user = User::where('username', $username)->first();
+        $message = "OK";
+        $status = true;
+        if ($user) {
+            $message = "Username is already taken";
+            $status = false;
+        }
+        return response()->json(['message' => $message, 'status' => $status]);
     }
 
     public function logout()

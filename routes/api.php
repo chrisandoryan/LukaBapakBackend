@@ -32,6 +32,8 @@ Route::apiResource('products', 'ProductController');
 Route::apiResource('categories', 'CategoryController');
 Route::apiResource('promotions', 'PromoController');
 Route::get('payment/download', 'CartController@export');
+Route::apiResource('users', 'UserController');
+Route::get('checkUsername/{username}', 'AuthController@checkUsername');
 
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::apiResource('admins', 'AdminController');

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\HeaderTransaction;
-use App\DetailTransaction;
-use App\Http\Resources\TransactionResource;
+use App\User;
 
-class TransactionController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +15,6 @@ class TransactionController extends Controller
     public function index()
     {
         //
-        $user = auth()->userOrFail();
-        $orders= HeaderTransaction::where('seller_uuid', $user->uuid)->with('detailTransactions')
-                                                        ->with('detailTransactions.product')
-                                                        ->with('user')
-                                                        ->get();
-
-        return TransactionResource::collection($orders);
     }
 
     /**
@@ -35,20 +26,6 @@ class TransactionController extends Controller
     {
         //
     }
-    
-    public function addHeader(Request $request) 
-    {
-        $user = auth()->userOrFail();
-        // var_dump($request->seller_id);
-        $header = HeaderTransaction::create([
-            'seller_uuid' => $request->seller_id,
-            'buyer_uuid' => $user->uuid,
-            'status_id' => 0,
-            'delivery_address' => $request->address,
-        ]);
-
-        return response()->json($header);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -59,13 +36,6 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         //
-        $user = auth()->userOrFail();
-    
-        $detail = DetailTransaction::create([
-            'header_id' => $request->header_id,
-            'product_uuid' => $request->product_id,
-            'amount' => $request->amount,
-        ]);
     }
 
     /**
@@ -77,6 +47,8 @@ class TransactionController extends Controller
     public function show($id)
     {
         //
+        $user = User::where('uuid', $id)->with('products')->get();
+        return $user;
     }
 
     /**
@@ -100,10 +72,6 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $header = HeaderTransaction::where('id', $id)->first();
-        dd($request->status);
-        $header->status_id = $request->status;
-        $header->save();
     }
 
     /**

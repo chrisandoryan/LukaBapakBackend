@@ -9,17 +9,41 @@ use App\HeaderFavorite;
 use App\HeaderPromotion;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
+use Elasticquent\ElasticquentTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+    use ElasticquentTrait;
+
+    function getIndexName()
+    {
+        return 'pelapak';
+    }
+
+    protected $mappingProperties = array(
+        'username' => [
+            'type' => 'text',
+            "analyzer" => "edge_ngram_analyzer",
+        ],
+        'name' => [
+            'type' => 'text',
+            "analyzer" => "standard",
+        ],
+    );
+
     public $incrementing = false;
     protected $primaryKey = 'uuid';
     // public $timestamps = false;
     protected $table = 'new_users';
     // protected $table = 'old_users';
-    
+
+    function getTypeName()
+    {
+        return 'new_users';
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -56,9 +80,9 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function product()
+    public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'user_uuid', 'uuid');
     }
 
     public function CartHeaders()
@@ -79,7 +103,7 @@ class User extends Authenticatable implements JWTSubject
     public function headerPromotion()
     {
         return $this->hasMany(HeaderPromotion::class);
-    }   
+    }
 
     public function verifyUser()
     {

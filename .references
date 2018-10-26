@@ -33,3 +33,6 @@ insert into detail_promotions values(null, (select uuid from products order by r
 
 cart
 https://codepen.io/justinklemm/pen/zAdoJ
+
+pelapak suggestion
+https://blog.bitsrc.io/how-to-build-an-autocomplete-widget-with-react-and-elastic-search-dd4f846f784

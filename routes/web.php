@@ -1,6 +1,7 @@
 <?php
 
 use App\Product;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,15 @@ Route::get('/elasticquentproduct', function () {
     // Product::createIndex($shards = null, $replicas = null);
     Product::putMapping($ignoreConflicts = true);
     Product::addAllToIndex();
-    echo "Done Mapping to Elasticsearch";
+
     // Product::rebuildMapping();
+});
+
+Route::get('/elasticquentuser', function() {
+    // dd(User::typeExists());
+    User::putMapping($ignoreConflicts = true);
+    User::addAllToIndex();
+    echo "Done Mapping to Elasticsearch";
 });
 
 // Route::get('/', 'HOController@convertHODBToUsefulDB');
