@@ -60,7 +60,7 @@ class Product extends Model
     public function category()
     {
         // return $this->belongsTo(Category::class, 'category_id', 'id');
-        return $this->belongsTo(Category::class, 'category_uuid', 'uuid');
+        return $this->belongsTo(ReverseCategory::class, 'category_uuid', 'uuid'); //in case of eerror change this back to Category::class
     }
 
     public function cartDetails()

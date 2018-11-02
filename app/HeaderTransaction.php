@@ -16,4 +16,8 @@ class HeaderTransaction extends Model
     public function user() {
         return $this->belongsTo(User::class, 'buyer_uuid');
     }
+
+    public function seller() {
+        return $this->belongsTo(User::class, 'seller_uuid');
+    }
 }

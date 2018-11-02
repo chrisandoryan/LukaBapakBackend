@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
+use App\ReverseCategory;
 
 class CategoryController extends Controller
 {
@@ -13,6 +14,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function allCategories() 
+    {
+        $categories = Category::all();
+
+        return CategoryResource::collection($categories);
+    }
     public function index()
     {
         //
@@ -52,6 +60,11 @@ class CategoryController extends Controller
             ]);
         }
         return new CategoryResource($category);
+    }
+
+    public function getNested(Request $request) {
+        $id = $request->leaf;
+        return ReverseCategory::where('uuid', $id)->get();
     }
 
     /**

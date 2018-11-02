@@ -63,6 +63,17 @@ class VoucherController extends Controller
     {
         //
     }
+    
+    public function checkVoucher($code) {
+        $status = true;
+        $message = "";
+        $voucher = Voucher::where('code', $code)->first();
+        if (!$voucher) {
+            $message = "Voucher not available";
+            $status = false;
+        }
+        return response()->json(['message' => $message, 'status' => $status, 'voucher' => $voucher]);
+    }
 
     /**
      * Show the form for editing the specified resource.

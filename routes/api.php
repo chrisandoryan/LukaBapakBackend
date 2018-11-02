@@ -30,12 +30,16 @@ Route::get('admin/verify/{token}', 'AuthController@activateAccount')->name('acti
 
 Route::apiResource('products', 'ProductController');
 Route::apiResource('categories', 'CategoryController');
+Route::get('allcategories', 'CategoryController@allCategories');
 Route::apiResource('promotions', 'PromoController');
 Route::get('payment/download', 'CartController@export');
 Route::apiResource('users', 'UserController');
 Route::get('checkUsername/{username}', 'AuthController@checkUsername');
+Route::get('applyvoucher/{voucher}', 'VoucherController@checkVoucher');
+Route::get('nestedCategory', 'CategoryController@getNested');
 
 Route::group(['middleware' => ['jwt.auth']], function () {
+    Route::post('add-resi/{id}', 'TransactionController@addResi');
     Route::apiResource('admins', 'AdminController');
     Route::apiResource('vouchers', 'VoucherController');
     Route::post('me', 'AuthController@meFromToken')->name('me');
@@ -46,4 +50,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     Route::apiResource('images', 'ImageController');
     Route::apiResource('transactions', 'TransactionController');
     Route::post('header-transaction', 'TransactionController@addHeader');
+    Route::get('orders', 'TransactionController@getOrders');
+    Route::get('ongoing-orders', 'TransactionController@getOngoingTransactions');
+    Route::get('finished-orders', 'TransactionController@getFinishedTransactions');
 });

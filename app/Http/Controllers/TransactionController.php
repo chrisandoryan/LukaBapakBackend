@@ -14,14 +14,24 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function addResi(Request $request, $id)
+    {
+        $header = HeaderTransaction::where('id', $id)->first();
+        // dd($request->resi);
+        $header->resi = $request->resi;
+        $header->save();
+        return response()->json($header);
+    }
+
     public function index()
     {
         //
         $user = auth()->userOrFail();
-        $orders= HeaderTransaction::where('seller_uuid', $user->uuid)->with('detailTransactions')
-                                                        ->with('detailTransactions.product')
-                                                        ->with('user')
-                                                        ->get();
+        $orders = HeaderTransaction::where('seller_uuid', $user->uuid)->where('status_id', '=', null)
+            ->with('detailTransactions')
+            ->with('detailTransactions.product')
+            ->with('user')
+            ->get();
 
         return TransactionResource::collection($orders);
     }
@@ -35,8 +45,8 @@ class TransactionController extends Controller
     {
         //
     }
-    
-    public function addHeader(Request $request) 
+
+    public function addHeader(Request $request)
     {
         $user = auth()->userOrFail();
         // var_dump($request->seller_id);
@@ -60,7 +70,7 @@ class TransactionController extends Controller
     {
         //
         $user = auth()->userOrFail();
-    
+
         $detail = DetailTransaction::create([
             'header_id' => $request->header_id,
             'product_uuid' => $request->product_id,
@@ -101,9 +111,56 @@ class TransactionController extends Controller
     {
         //
         $header = HeaderTransaction::where('id', $id)->first();
-        dd($request->status);
+        // dd($request->status);
         $header->status_id = $request->status;
         $header->save();
+    }
+
+    public function getOrders()
+    {
+        $user = auth()->userOrFail();
+        $orders = HeaderTransaction::where('seller_uuid', $user->uuid)
+            ->where('status_id', '>', 0)
+            ->with('detailTransactions')
+            ->with('detailTransactions.product')
+            ->with('user')
+            ->get();
+
+        return TransactionResource::collection($orders);
+    }
+
+    public function getOngoingTransactions()
+    {
+        $user = auth()->userOrFail();
+        $trans = HeaderTransaction::where('buyer_uuid', $user->uuid)
+            ->where('status_id', '>', 0) //-2 adalah selesai, -1 adalah ditolak
+            ->orWhere('status_id', '=', null)
+            ->with('detailTransactions')
+            ->with('detailTransactions.product')
+            ->with('seller')
+            ->with('user')
+            ->get();
+
+        return TransactionResource::collection($trans);
+    }
+
+    public function getFinishedTransactions() 
+    {
+        $user = auth()->userOrFail();
+        $trans = HeaderTransaction::where('buyer_uuid', $user->uuid)
+            ->where('status_id', '<=', 0) //-2 adalah selesai, -1 adalah ditolak
+            ->with('detailTransactions')
+            ->with('detailTransactions.product')
+            ->with('seller')
+            ->with('user')
+            ->get();
+
+        return TransactionResource::collection($trans);
+    }
+
+    public function updateOrders()
+    {
+
     }
 
     /**
