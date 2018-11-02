@@ -34,6 +34,7 @@ Route::get('allcategories', 'CategoryController@allCategories');
 Route::apiResource('promotions', 'PromoController');
 Route::get('payment/download', 'CartController@export');
 Route::apiResource('users', 'UserController');
+Route::apiResource('populars', 'ProductTagController');
 Route::get('checkUsername/{username}', 'AuthController@checkUsername');
 Route::get('applyvoucher/{voucher}', 'VoucherController@checkVoucher');
 Route::get('nestedCategory', 'CategoryController@getNested');

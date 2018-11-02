@@ -111,6 +111,8 @@ class ProductController extends Controller
     {
         //
         // $product->visit();
+        $tag = $product->productTags;
+        $tag->visit();
         return new ProductResource($product);
     }
 

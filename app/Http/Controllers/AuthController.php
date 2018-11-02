@@ -37,8 +37,8 @@ class AuthController extends Controller
         // return $request;
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|unique:new_users',
-            'username' => 'required|unique:new_users',
+            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
             'gender' => 'required'
         ]);
@@ -47,11 +47,15 @@ class AuthController extends Controller
             return response()->json(['error' => 'Duplicated data'], 400);
         }
 
+        // dd($request->phone);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
             'password' => bcrypt($request->password),
+            'gender' => $request->gender,
+            'phone' => $request->phone
         ]);
 
         // uncomment below for auto login after registering
@@ -76,9 +80,10 @@ class AuthController extends Controller
         // dd($credentials);
         // $user = User::where('email', $request->email)->where('password', bcrypt($request->password))->first();
         if ($request->mode == "phone") {
+            // dd($request->email);
             $user = User::where('phone', $request->email)->first();
             if (!$user) {
-                return response()->json(['message' => 'Invalid email or password']);
+                return response()->json(['message' => 'Invalid phone or password']);
             }
             else if (Hash::check($request->password, $user->password)) {
                 $credentials = ['email' => $user->email, 'password' => $request->password];
@@ -92,7 +97,7 @@ class AuthController extends Controller
         else if ($request->mode == "username") {
             $user = User::where('username', $request->email)->first();
             if ($user == null) {
-                return response()->json(['message' => 'Invalid email or password']);
+                return response()->json(['message' => 'Invalid username or password']);
             }
             else if (Hash::check($request->password, $user->password)) {
                 $credentials = ['email' => $user->email, 'password' => $request->password];
