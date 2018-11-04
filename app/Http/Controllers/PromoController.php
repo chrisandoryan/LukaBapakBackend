@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PromoResource;
 use App\HeaderPromotion;
 use App\DetailPromotion;
+use Carbon\Carbon;
 
 class PromoController extends Controller
 {
@@ -20,7 +21,10 @@ class PromoController extends Controller
         // dd(DetailPromotion::with(['headerPromotion', 'product'])->get());
         // return PromoResource::collection(DetailPromotion::with(['headerPromotion', 'product'])->get());
         // dd(HeaderPromotion::find(1)->get()->detailPromotion());
-        return PromoResource::collection(HeaderPromotion::where('is_active', 1)->with('detailPromotions.images')->get());
+        $promos = HeaderPromotion::where('is_active', 1)
+                            ->where('end_date', '>', Carbon::now())
+                            ->with('detailPromotions.images')->get();
+        return PromoResource::collection($promos);
     }
 
     /**

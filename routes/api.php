@@ -38,6 +38,8 @@ Route::apiResource('populars', 'ProductTagController');
 Route::get('checkUsername/{username}', 'AuthController@checkUsername');
 Route::get('applyvoucher/{voucher}', 'VoucherController@checkVoucher');
 Route::get('nestedCategory', 'CategoryController@getNested');
+Route::get('similars', 'ProductController@getSimilarProducts');
+Route::apiResource('images', 'ImageController');
 
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::post('add-resi/{id}', 'TransactionController@addResi');
@@ -48,7 +50,6 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     Route::apiResource('carts', 'CartController');
     Route::apiResource('reviews', 'ReviewController');
     Route::apiResource('discussions', 'DiscussionController');
-    Route::apiResource('images', 'ImageController');
     Route::apiResource('transactions', 'TransactionController');
     Route::post('header-transaction', 'TransactionController@addHeader');
     Route::get('orders', 'TransactionController@getOrders');

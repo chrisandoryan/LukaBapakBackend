@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Intervention\Image\Facades\Image as Img;
 
 class UserController extends Controller
 {
@@ -72,6 +73,27 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $user = User::where('uuid', $id)->get();
+        $user = auth()->userOrFail();
+
+        if ($request->mode == "user") {
+            $user->name = $request->name;
+            $user->gender = $request->gender;
+            $user->password = bcrypt($request->password);
+        } else if ($request->mode == "lapak") {
+            $user->description = $request->description;
+            $user->lapak_note = $request->note;
+
+            $image = $request->get('image');
+            $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            Img::make($image)->save(public_path('images/') . $name);
+
+            $user->header_photo = "http://localhost:8000/api/images/".$name;
+        }
+
+        $user->save();
+
+        return $user;
     }
 
     /**

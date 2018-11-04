@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image as Img;
 use App\Http\Resources\VoucherResource;
 use App\Voucher;
+use Carbon\Carbon;
 
 class VoucherController extends Controller
 {
@@ -67,7 +68,7 @@ class VoucherController extends Controller
     public function checkVoucher($code) {
         $status = true;
         $message = "";
-        $voucher = Voucher::where('code', $code)->first();
+        $voucher = Voucher::where('code', $code)->where('end_date', '>', Carbon::now())->first();
         if (!$voucher) {
             $message = "Voucher not available";
             $status = false;

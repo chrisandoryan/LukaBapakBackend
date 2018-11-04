@@ -37,18 +37,18 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         //
-        $image = $request->get('image');
-        $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-        Img::make($image)->save(public_path('images/').$name);
+        // $image = $request->get('image');
+        // $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+        // Img::make($image)->save(public_path('images/').$name);
 
-        $upload = Image::create([
-            'product_uuid' => $request->productId,
-            'product_id' => 999,
-            'url' => "http://localhost:8000/api/images/" + $name,
-            'filename' => $name,
-        ]);
+        // $upload = Image::create([
+        //     'product_uuid' => $request->productId,
+        //     'product_id' => 999,
+        //     'url' => "http://localhost:8000/api/images/" + $name,
+        //     'filename' => $name,
+        // ]);
         
-        return $upload;
+        // return $upload;
     }
 
     /**
@@ -60,6 +60,7 @@ class ImageController extends Controller
     public function show($id)
     {
         //
+        return response()->file(public_path('images/').$id);
     }
 
     /**

@@ -8,12 +8,14 @@ use App\Http\Resources\ProductResource;
 use App\Category;
 use Intervention\Image\Facades\Image as Img;
 use App\Image;
+use App\ProductTag;
+// use GuzzleHttp\Psr7\Request;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index', 'show']);
+        $this->middleware('auth:api')->except(['index', 'show', 'getSimilarProducts']);
     }
     /**
      * Display a listing of the resource.
@@ -53,6 +55,11 @@ class ProductController extends Controller
         //
     }
 
+    public function getSimilarProducts(Request $request) {
+        $products = Product::where('category_uuid', $request->uuid)->get()->take(10);
+        return $products;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -64,6 +71,18 @@ class ProductController extends Controller
         //
         $user = auth()->userOrFail();
         Product::unguard();
+
+        $tags = explode(',', $request->tags);
+        foreach($tags as $t) {
+            $t = $tag.trim();
+            $tag = ProductTag::where('tag_name', $t)->first();
+            if (!$tag) { //kalo ga ada di db
+                ProductTag::create([
+                    'tag_name' => $t,
+                ]);
+            }
+        }
+
         $product = Product::create([
             'id' => 999,
             'user_id' => 999,
@@ -82,7 +101,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'product_condition' => $request->condition,
             'stock' => $request->stock,
-            'view_count' => 0,
+            'view_count' => 1000,
         ]);
 
         Product::reguard();

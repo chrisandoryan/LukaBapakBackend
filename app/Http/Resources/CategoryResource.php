@@ -17,7 +17,8 @@ class CategoryResource extends Resource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'subcategory' => $this->children
+            'subcategory' => $this->children,
+            'icon' => $this->icon,
         ];
     }
 }
