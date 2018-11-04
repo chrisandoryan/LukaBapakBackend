@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\HeaderTransaction;
 use App\DetailTransaction;
 use App\Http\Resources\TransactionResource;
+use App\CartHeader;
+use App\CartDetail;
+use App\Product;
 
 class TransactionController extends Controller
 {
@@ -49,6 +52,8 @@ class TransactionController extends Controller
     public function addHeader(Request $request)
     {
         $user = auth()->userOrFail();
+
+        $cart = CartDetail::where('user_uuid', $user->uuid)->delete();
         // var_dump($request->seller_id);
         $header = HeaderTransaction::create([
             'seller_uuid' => $request->seller_id,
@@ -70,6 +75,10 @@ class TransactionController extends Controller
     {
         //
         $user = auth()->userOrFail();
+
+        $product = Product::where('uuid', $request->product_id)->first();
+        $product->stock = $product->stock - $request->amount;
+        $product->save();
 
         $detail = DetailTransaction::create([
             'header_id' => $request->header_id,
