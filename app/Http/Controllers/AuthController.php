@@ -145,7 +145,7 @@ class AuthController extends Controller
 
     public function activateAccount($token)
     {
-        $verifyUser = VerifyUser::where('token', $token)->first();
+        $verifyUser = VerifyUser::where('token', $token)->where('created_at', '<',Carbon::parse('-24 hours'))->first();
         if (isset($verifyUser)) {
             $user = $verifyUser->user;
             if (!$user->is_admin) {

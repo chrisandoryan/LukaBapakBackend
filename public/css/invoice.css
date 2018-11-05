@@ -1,0 +1,291 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #F5F6F8;
+    color: #444;
+    line-height: 1.5;
+    font-family: 'helvetica-neue', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: inherit;
+    font-family: inherit;
+    font-weight: normal;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+}
+
+.credit {
+    color: #999;
+    font-size: 0.719em;
+    margin-top: 15em;
+}
+
+.btn--primary {
+    color: #FFF;
+    cursor: pointer;
+    background-color: #3ea0e9;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 1.4em 7em;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 1.5em;
+    box-shadow: 0 6px 12px -6px #2581c5;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.btn--primary:hover,
+.btn--primary:focus {
+    background-color: #78c4fd;
+    outline: none;
+    padding: 1.4em 7.3em;
+}
+
+@media (max-width: 57em) {
+    .btn--primary {
+        width: 100%;
+    }
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th,
+tr {
+    border-bottom: 1px solid #E7EBEE;
+}
+
+tbody tr:last-child {
+    border-bottom: 2px solid #E7EBEE;
+}
+
+th {
+    padding: 0.25em 0;
+}
+
+td {
+    padding: 1.5em 0;
+    font-size: 0.938em;
+}
+
+.table__label {
+    color: #c1c3cc;
+    font-weight: normal;
+    font-size: 0.75em;
+}
+
+.table__label--secondary {
+    color: inherit;
+}
+
+.table__label--large {
+    font-size: 0.875em;
+}
+
+.table__discount {
+    color: #646B73;
+}
+
+.table__total {
+    color: #3ea0e9;
+    font-size: 1.563em;
+}
+
+.wrapper {
+    margin: 4em auto;
+    max-width: 55em;
+}
+
+@media (max-width: 57em) {
+    .wrapper {
+        margin: 0 auto;
+        padding: 20px;
+    }
+}
+
+.logo {
+    margin: 4em auto 2.5em;
+    display: block;
+    transition: all 0.3s ease 0s;
+}
+
+.logo:hover,
+.logo:focus {
+    opacity: 0.35;
+}
+
+@media (max-width: 57em) {
+    .logo {
+        margin: 0 auto 20px;
+    }
+}
+
+header {
+    background-color: #1f2229;
+    color: #99a1b1;
+    font-size: 0.875em;
+    line-height: 1.6;
+    padding: 5% 10% 0 10%;
+    min-height: 100px;
+}
+
+.header__title {
+    color: #FFF;
+    font-size: 2.9em;
+    font-family: 'Baskerville', serif;
+}
+
+.invoice__total {
+    background-color: #3ea0e9;
+    color: #FFF;
+    padding: 1em 2em;
+}
+
+.header__sum {
+    color: #FFF;
+    font-size: 2.5em;
+    font-weight: 300;
+}
+
+section {
+    background-color: #FFF;
+    padding: 10%;
+    min-height: 100px;
+    box-shadow: 0 30px 55px -35px #1f2229;
+}
+
+.left-column,
+.right-column {
+    width: 40%;
+}
+
+@media (max-width: 57em) {
+
+    .left-column,
+    .right-column {
+        width: 50%;
+    }
+
+    .right-column--mobile {
+        width: 80%;
+    }
+}
+
+footer {
+    padding: 4em 2em 0 2em;
+}
+
+@media (max-width: 57em) {
+    footer {
+        padding: 3em 0 0 0;
+    }
+}
+
+.footer__caption,
+.footer__icon {
+    color: #999;
+    font-size: 0.719em;
+    margin-right: 0.6em;
+    margin-left: 0.6em;
+}
+
+.u-text-left {
+    text-align: left;
+}
+
+.u-text-center {
+    text-align: center;
+}
+
+.u-text-right {
+    text-align: right;
+}
+
+.u-full-width {
+    width: 100%;
+}
+
+.u-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.u-no-margin {
+    margin: 0;
+}
+
+.u-no-border {
+    border: 0 none !important;
+}
+
+.u-pull-left {
+    float: left;
+}
+
+.u-pull-right {
+    float: right;
+}
+
+.u-list-unstyled {
+    padding: 0;
+    list-style-type: none;
+}
+
+.u-list-unstyled--last {
+    margin-bottom: 0;
+    padding-bottom: 1em;
+}
+
+.u-cf:before,
+.u-cf:after {
+    content: " ";
+    display: table;
+}
+
+.u-cf:after {
+    clear: both;
+}
+
+@media (max-width: 57em) {
+    .u-show-mobile {
+        display: block;
+    }
+
+    .u-hide-mobile {
+        display: none;
+    }
+}
+
+@media (min-width: 57em) {
+    .u-show-mobile {
+        display: none;
+    }
+
+    .u-hide-mobile {
+        display: block;
+    }
+}

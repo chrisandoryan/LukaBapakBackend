@@ -11,6 +11,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.0.0",
+        "barryvdh/laravel-dompdf": "^0.8.3",
         "cviebrock/laravel-elasticsearch": "^3.2",
         "elasticquent/elasticquent": "dev-master",
         "fideloper/proxy": "~3.3",

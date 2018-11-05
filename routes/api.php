@@ -40,6 +40,7 @@ Route::get('applyvoucher/{voucher}', 'VoucherController@checkVoucher');
 Route::get('nestedCategory', 'CategoryController@getNested');
 Route::get('similars', 'ProductController@getSimilarProducts');
 Route::apiResource('images', 'ImageController');
+Route::get('invoice/download', 'TransactionController@downloadInvoice');
 
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::post('add-resi/{id}', 'TransactionController@addResi');

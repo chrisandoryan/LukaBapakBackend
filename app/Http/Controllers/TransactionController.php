@@ -9,6 +9,7 @@ use App\Http\Resources\TransactionResource;
 use App\CartHeader;
 use App\CartDetail;
 use App\Product;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class TransactionController extends Controller
 {
@@ -17,6 +18,20 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function downloadInvoice(Request $request) 
+    {
+        $user = auth()->userOrFail();
+        $data = HeaderTransaction::where('buyer_uuid', $user->uuid)
+                    ->where('status_id', '=', null)
+                    ->with('detailTransactions')
+                    ->with('detailTransactions.product')->get();
+        // return $data;                    
+        $pdf = PDF::loadView('invoices.invoice', ['data' => $data]);
+        return $pdf->save(public_path() . 'invoice.pdf')->stream('invoice.pdf');
+        // return view('invoices.invoice', ['data' => $data]);
+    }
+
     public function addResi(Request $request, $id)
     {
         $header = HeaderTransaction::where('id', $id)->first();

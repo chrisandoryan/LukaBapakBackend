@@ -15,8 +15,9 @@ use App\User;
 */
 
 Route::get('/', function() {
-    return view('welcome');
+    return view('invoices.invoice');
 });
+Route::get('/inv', 'TransactionController@downloadInvoice');
 
 Route::get('/elasticquentproduct', function () {
     // Product::createIndex($shards = null, $replicas = null);
